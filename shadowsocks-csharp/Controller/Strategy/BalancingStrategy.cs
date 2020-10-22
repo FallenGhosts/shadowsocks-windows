@@ -1,4 +1,4 @@
-﻿using Shadowsocks.Controller;
+using Shadowsocks.Controller;
 using Shadowsocks.Model;
 using System;
 using System.Collections.Generic;
@@ -9,18 +9,19 @@ namespace Shadowsocks.Controller.Strategy
 {
     class BalancingStrategy : IStrategy
     {
-        ShadowsocksController _controller;
+        //ShadowsocksController _controller;
         Random _random;
 
-        public BalancingStrategy(ShadowsocksController controller)
+        public BalancingStrategy()
         {
-            _controller = controller;
+            //todo
+            //_controller = controller;
             _random = new Random();
         }
 
         public string Name
         {
-            get { return I18N.GetString("Load Balance"); }
+            get { return "Load Balance"; }
         }
 
         public string ID
@@ -35,7 +36,9 @@ namespace Shadowsocks.Controller.Strategy
 
         public Server GetAServer(IStrategyCallerType type, IPEndPoint localIPEndPoint, EndPoint destEndPoint)
         {
-            var configs = _controller.GetCurrentConfiguration().configs;
+            List<Server> configs = null;
+            // todo
+            //var configs = _controller.GetCurrentConfiguration().configs;
             int index;
             if (type == IStrategyCallerType.TCP)
             {

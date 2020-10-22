@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using Shadowsocks.Model;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Shadowsocks.Controller.Strategy
 
         protected ServerStatus _currentServer;
         protected Dictionary<Server, ServerStatus> _serverStatus;
-        ShadowsocksController _controller;
+        //ShadowsocksController _controller;
         Random _random;
 
         public class ServerStatus
@@ -36,16 +36,17 @@ namespace Shadowsocks.Controller.Strategy
             public double score;
         }
 
-        public HighAvailabilityStrategy(ShadowsocksController controller)
+        public HighAvailabilityStrategy()
         {
-            _controller = controller;
+            // todo
+            //_controller = controller;
             _random = new Random();
             _serverStatus = new Dictionary<Server, ServerStatus>();
         }
 
         public string Name
         {
-            get { return I18N.GetString("High Availability"); }
+            get { return "High Availability"; }
         }
 
         public string ID
@@ -58,7 +59,8 @@ namespace Shadowsocks.Controller.Strategy
             // make a copy to avoid locking
             var newServerStatus = new Dictionary<Server, ServerStatus>(_serverStatus);
 
-            foreach (var server in _controller.GetCurrentConfiguration().configs)
+            // todo
+            foreach (var server in new List<Server>())
             {
                 if (!newServerStatus.ContainsKey(server))
                 {
